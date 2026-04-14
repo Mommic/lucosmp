@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LucoSMP.de - Dein CityBuild Server</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #f0d080;
+            --gold-bright: #ffe066;
+            --gold-dark: #8a6a1a;
+            --black: #080808;
+            --surface: #0f0f0f;
+            --surface2: #141414;
+            --text: #e8e0cc;
+            --muted: #7a7060;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--black);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: rgba(8,8,8,0.97);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--gold);
+            box-shadow: 0 4px 30px rgba(201,168,76,0.15);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+        }
+
+        .nav-logo img {
+            width: 46px; height: 46px;
+            border-radius: 8px;
+            border: 1px solid var(--gold-dark);
+        }
+
+        .nav-logo span {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 18px rgba(201,168,76,0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(201,168,76,0.08);
+            color: var(--gold);
+        }
+
+        .nav-links a.btn-home {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #080808;
+            font-weight: 800;
+        }
+
+        .nav-links a.btn-home:hover {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+            box-shadow: 0 0 18px rgba(201,168,76,0.4);
+        }
+
+        .nav-links a.btn-discord {
+            background: #5865F2;
+            color: #fff;
+        }
+
+        .nav-links a.btn-wiki {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #080808;
+            font-weight: 800;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            margin-top: 70px;
+            height: 600px;
+            background: url('hero-background.png') center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(8,8,8,0.35) 0%, rgba(8,8,8,0.85) 100%);
+        }
+
+        /* Gold shimmer lines */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    transparent 119px,
+                    rgba(201,168,76,0.04) 119px,
+                    rgba(201,168,76,0.04) 120px
+                );
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            width: 180px; height: 180px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 10px 40px rgba(201,168,76,0.6)) drop-shadow(0 0 80px rgba(201,168,76,0.2));
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 80px;
+            margin-top: 40px;
+            justify-content: center;
+        }
+
+        .stat-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 24px 32px;
+            background: rgba(8,8,8,0.7);
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.3s;
+        }
+
+        .stat-box:hover { border-color: var(--gold); }
+
+        .stat-number {
+            font-family: 'Cinzel', serif;
+            font-size: 44px;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(201,168,76,0.5);
+        }
+
+        .stat-label {
+            font-size: 15px;
+            color: var(--text);
+            font-weight: 600;
+            letter-spacing: 1px;
+            line-height: 1.5;
+        }
+
+        /* ── JOIN ── */
+        .join-section {
+            padding: 80px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .join-section h2 {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 38px;
+            font-weight: 900;
+            margin-bottom: 14px;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-shadow: 0 0 30px rgba(201,168,76,0.3);
+        }
+
+        .join-section p {
+            text-align: center;
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Decorative divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .divider-line { flex: 1; max-width: 120px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark)); }
+        .divider-line.right { background: linear-gradient(90deg, var(--gold-dark), transparent); }
+        .divider-diamond {
+            width: 8px; height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+        }
+
+        .edition-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .edition-btn {
+            padding: 13px 44px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold-dark);
+            background: transparent;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .edition-btn.active,
+        .edition-btn:hover {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-color: var(--gold);
+            color: #080808;
+            box-shadow: 0 0 20px rgba(201,168,76,0.3);
+        }
+
+        .steps-container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--surface2);
+            border: 1px solid rgba(201,168,76,0.25);
+            border-radius: 16px;
+            padding: 48px;
+            box-shadow: 0 0 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.1);
+        }
+
+        .edition-content { display: none; }
+        .edition-content.active { display: block; }
+
+        .steps-container h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            color: var(--gold);
+            margin-bottom: 36px;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+
+        .step {
+            display: flex;
+            gap: 22px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #080808;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+        }
+
+        .step-content h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+        }
+
+        .step-content p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .server-address {
+            display: inline-block;
+            background: rgba(201,168,76,0.1);
+            border: 1px solid rgba(201,168,76,0.5);
+            padding: 3px 14px;
+            border-radius: 6px;
+            color: var(--gold);
+            font-weight: 700;
+            margin: 0 4px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: rgba(4,4,4,0.98);
+            padding: 60px 50px 30px;
+            border-top: 2px solid var(--gold-dark);
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-logo img {
+            width: 72px; height: 72px;
+            border-radius: 10px;
+            border: 1px solid var(--gold-dark);
+        }
+
+        .footer-logo p { color: var(--muted); font-size: 14px; line-height: 1.8; }
+
+        .footer-links { display: flex; gap: 80px; }
+
+        .footer-column h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 16px;
+            margin-bottom: 18px;
+            letter-spacing: 2px;
+        }
+
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 12px; }
+        .footer-column ul li a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .footer-column ul li a:hover { color: var(--gold); }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 28px;
+            border-top: 1px solid rgba(201,168,76,0.12);
+            color: var(--muted);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .copy-feedback {
+            position: fixed;
+            top: 90px;
+            right: 40px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #080808;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 2000;
+            pointer-events: none;
+        }
+
+        .copy-feedback.show { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .hero { height: 420px; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .nav-links { display: none; }
+            .edition-buttons { flex-direction: column; }
+            .footer-content { flex-direction: column; gap: 40px; }
+            .footer-links { flex-direction: column; gap: 30px; }
+            .steps-container { padding: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logo.png" alt="LucoSMP Logo">
+                <span>LucoSMP</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/" class="btn-home">HOME</a></li>
+                <li><a href="/team">TEAM</a></li>
+                <li><a href="/citybuild">CITYBUILD</a></li>
+                <li><a href="/support">SUPPORT</a></li>
+                <li>
+                    <a href="https://discord.lucosmp.de" class="btn-discord">
+                        <svg width="20" height="16" viewBox="0 0 245 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M207.308 16.903C191.269 9.722 174.078 4.455 156.101 1.432C153.898 5.378 151.319 10.665 149.565 14.892C130.408 12.09 111.42 12.09 92.617 14.892C90.863 10.665 88.228 5.378 86.008 1.432C68.013 4.455 50.804 9.74 34.765 16.938C4.945 64.604 -3.027 111.069 0.959 156.876C22.215 172.761 42.826 182.426 63.1 188.725C68.195 181.629 72.746 174.082 76.617 166.145C69.05 163.235 61.798 159.628 54.964 155.435C56.718 154.157 58.436 152.826 60.1 151.44C99.994 170.524 143.394 170.524 182.825 151.44C184.507 152.826 186.225 154.157 187.962 155.435C181.11 159.645 173.84 163.252 166.273 166.163C170.144 174.082 174.677 181.647 179.789 188.743C200.081 182.444 220.709 172.779 241.965 156.876C246.688 104.215 233.44 58.178 207.308 16.903ZM80.703 128.716C69.195 128.716 59.723 118.171 59.723 105.268C59.723 92.366 68.997 81.803 80.703 81.803C92.408 81.803 101.882 92.348 101.683 105.268C101.7 118.171 92.408 128.716 80.703 128.716ZM164.37 128.716C152.862 128.716 143.39 118.171 143.39 105.268C143.39 92.366 152.664 81.803 164.37 81.803C176.075 81.803 185.549 92.348 185.35 105.268C185.35 118.171 176.075 128.716 164.37 128.716Z" fill="white"/>
+                        </svg>
+                        DISCORD
+                    </a>
+                </li>
+                <li><a href="/wiki" class="btn-wiki">WIKI</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="copy-feedback" id="copyFeedback">Kopiert!</div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <img src="logo.png" alt="LucoSMP Logo" class="hero-logo">
+            <div class="hero-stats">
+                <div class="stat-box">
+                    <!-- Discord logo with eyes (evenodd cutout) -->
+                    <svg width="40" height="31" viewBox="0 0 245 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M207.308 16.903C191.269 9.722 174.078 4.455 156.101 1.432C153.898 5.378 151.319 10.665 149.565 14.892C130.408 12.09 111.42 12.09 92.617 14.892C90.863 10.665 88.228 5.378 86.008 1.432C68.013 4.455 50.804 9.74 34.765 16.938C4.945 64.604 -3.027 111.069 0.959 156.876C22.215 172.761 42.826 182.426 63.1 188.725C68.195 181.629 72.746 174.082 76.617 166.145C69.05 163.235 61.798 159.628 54.964 155.435C56.718 154.157 58.436 152.826 60.1 151.44C99.994 170.524 143.394 170.524 182.825 151.44C184.507 152.826 186.225 154.157 187.962 155.435C181.11 159.645 173.84 163.252 166.273 166.163C170.144 174.082 174.677 181.647 179.789 188.743C200.081 182.444 220.709 172.779 241.965 156.876C246.688 104.215 233.44 58.178 207.308 16.903ZM80.703 128.716C69.195 128.716 59.723 118.171 59.723 105.268C59.723 92.366 68.997 81.803 80.703 81.803C92.408 81.803 101.882 92.348 101.683 105.268C101.7 118.171 92.408 128.716 80.703 128.716ZM164.37 128.716C152.862 128.716 143.39 118.171 143.39 105.268C143.39 92.366 152.664 81.803 164.37 81.803C176.075 81.803 185.549 92.348 185.35 105.268C185.35 118.171 176.075 128.716 164.37 128.716Z" fill="#c9a84c"/>
+                    </svg>
+                    <div class="stat-number" id="discordOnline">...</div>
+                    <div class="stat-label">Online<br>Discord</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="join-section">
+        <h2>So kannst du beitreten</h2>
+        <p>Bereit loszulegen? Wähle deine Edition und folge diesen Schritten:</p>
+
+        <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-diamond"></div>
+            <div class="divider-line right"></div>
+        </div>
+
+        <div class="edition-buttons">
+            <button class="edition-btn active" onclick="switchEdition('java')">JAVA EDITION</button>
+            <button class="edition-btn" onclick="switchEdition('bedrock')">BEDROCK EDITION</button>
+        </div>
+
+        <!-- Java -->
+        <div class="steps-container edition-content active" id="java-steps">
+            <h3>Java Edition</h3>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Schritt 1</h4>
+                    <p>Klicke auf <strong>"Mehrspieler"</strong> und dann auf <strong>"Server hinzufügen"</strong></p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Schritt 2</h4>
+                    <p>Tipp die Adresse <span class="server-address">LucoSMP.de</span> in <strong>"Serveradresse"</strong> ein</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Schritt 3</h4>
+                    <p>Klicke auf <strong>"Fertig"</strong> und dann auf <strong>"Beitreten"</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bedrock -->
+        <div class="steps-container edition-content" id="bedrock-steps">
+            <h3>Bedrock Edition</h3>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Schritt 1</h4>
+                    <p>Gehe zu <strong>"Spielen"</strong> und dann zum Tab <strong>"Server"</strong></p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Schritt 2</h4>
+                    <p>Scrolle nach unten und klicke auf <strong>"Server hinzufügen"</strong></p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Schritt 3</h4>
+                    <p>Trage die Adresse <span class="server-address">LucoSMP.de</span> und Port <span class="server-address">19132</span> ein</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Schritt 4</h4>
+                    <p>Klicke auf <strong>"Speichern"</strong> und verbinde dich mit dem Server</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="footer-logo.png" alt="LucoSMP Logo">
+                <p>Copyright © 2026 LucoSMP®<br>We are not affiliated with Mojang, AB.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Partner</h4>
+                    <ul>
+                        <li><a href="#">Unsere Partner</a></li>
+                        <li><a href="#">Partner werden</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Team</h4>
+                    <ul>
+                        <li><a href="/team">Unser Team</a></li>
+                        <li><a href="#">Bewerben</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><a href="/impressum">Impressum</a></li>
+                        <li><a href="/datenschutz">Datenschutzerklärung</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>LucoSMP.de – Dein CityBuild Netzwerk &nbsp;•&nbsp; Made in Deutschland</p>
+        </div>
+    </footer>
+
+    <script>
+        async function loadServerStatus() {
+            try {
+                const r = await fetch('https://discord.com/api/v9/invites/6YTg2DvMMY?with_counts=true');
+                const d = await r.json();
+                document.getElementById('discordOnline').textContent = d.approximate_presence_count ?? 0;
+            } catch { document.getElementById('discordOnline').textContent = '0'; }
+        }
+
+        loadServerStatus();
+        setInterval(loadServerStatus, 30000);
+
+        function switchEdition(edition) {
+            document.querySelectorAll('.edition-btn').forEach((b, i) => b.classList.toggle('active', i === (edition === 'java' ? 0 : 1)));
+            document.getElementById('java-steps').classList.toggle('active', edition === 'java');
+            document.getElementById('bedrock-steps').classList.toggle('active', edition === 'bedrock');
+        }
+    </script>
+</body>
+</html>
