@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LucoSMP – Team</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #f0d080;
+            --gold-dark: #8a6a1a;
+            --black: #080808;
+            --surface: #0f0f0f;
+            --surface2: #141414;
+            --text: #e8e0cc;
+            --muted: #7a7060;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--black);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: rgba(8,8,8,0.97);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--gold);
+            box-shadow: 0 4px 30px rgba(201,168,76,0.15);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+        }
+
+        .nav-logo img {
+            width: 46px; height: 46px;
+            border-radius: 8px;
+            border: 1px solid var(--gold-dark);
+        }
+
+        .nav-logo span {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-shadow: 0 0 18px rgba(201,168,76,0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover { background: rgba(201,168,76,0.08); color: var(--gold); }
+        .nav-links a.active { background: rgba(201,168,76,0.08); color: var(--gold); }
+
+        .nav-links a.btn-home {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #080808;
+            font-weight: 800;
+        }
+        .nav-links a.btn-home:hover {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            box-shadow: 0 0 18px rgba(201,168,76,0.4);
+        }
+        .nav-links a.btn-discord { background: #5865F2; color: #fff; }
+        .nav-links a.btn-wiki {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #080808;
+            font-weight: 800;
+        }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            margin-top: 70px;
+            padding: 70px 24px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .page-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 52px;
+            font-weight: 900;
+            color: var(--gold);
+            letter-spacing: 6px;
+            text-shadow: 0 0 40px rgba(201,168,76,0.4);
+            margin-bottom: 14px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+            margin: 24px auto 0;
+            max-width: 300px;
+        }
+        .divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark)); }
+        .divider-line.right { background: linear-gradient(90deg, var(--gold-dark), transparent); }
+        .divider-diamond { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); }
+
+        /* ── TEAM SECTION ── */
+        .team-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        .rank-group {
+            margin-bottom: 64px;
+        }
+
+        .rank-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .rank-title-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold-dark), transparent);
+        }
+
+        .rank-badge {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            padding: 6px 20px;
+            border-radius: 4px;
+            border: 1px solid;
+            white-space: nowrap;
+        }
+
+        .rank-owner .rank-badge     { color: #ffd700; border-color: #ffd700; background: rgba(255,215,0,0.08); }
+        .rank-coowner .rank-badge   { color: #f0a030; border-color: #f0a030; background: rgba(240,160,48,0.08); }
+        .rank-manager .rank-badge   { color: #c9a84c; border-color: #c9a84c; background: rgba(201,168,76,0.08); }
+        .rank-techniker .rank-badge { color: #a0c8ff; border-color: #a0c8ff; background: rgba(160,200,255,0.08); }
+        .rank-admin .rank-badge     { color: #e05050; border-color: #e05050; background: rgba(224,80,80,0.08); }
+        .rank-dev .rank-badge       { color: #c080ff; border-color: #c080ff; background: rgba(192,128,255,0.08); }
+        .rank-mod .rank-badge       { color: #50c878; border-color: #50c878; background: rgba(80,200,120,0.08); }
+        .rank-builder .rank-badge   { color: #ff9f50; border-color: #ff9f50; background: rgba(255,159,80,0.08); }
+        .rank-helper .rank-badge    { color: #60aaff; border-color: #60aaff; background: rgba(96,170,255,0.08); }
+        .rank-media .rank-badge     { color: #ff60a8; border-color: #ff60a8; background: rgba(255,96,168,0.08); }
+
+        .members-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .member-card {
+            background: var(--surface2);
+            border: 1px solid rgba(201,168,76,0.15);
+            border-radius: 14px;
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            width: 180px;
+            transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            cursor: default;
+        }
+
+        .member-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(201,168,76,0.12);
+        }
+
+        .skin-wrapper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .skin-wrapper img {
+            width: 80px;
+            height: 80px;
+            image-rendering: pixelated;
+            border-radius: 8px;
+            border: 2px solid rgba(201,168,76,0.2);
+        }
+
+        .member-card:hover .skin-wrapper img {
+            border-color: var(--gold);
+        }
+
+        .member-name {
+            font-family: 'Cinzel', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .member-role {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 3px 12px;
+            border-radius: 4px;
+            border: 1px solid;
+        }
+
+        .role-owner     { color: #ffd700; border-color: rgba(255,215,0,0.4);   background: rgba(255,215,0,0.06); }
+        .role-coowner   { color: #f0a030; border-color: rgba(240,160,48,0.4);  background: rgba(240,160,48,0.06); }
+        .role-manager   { color: #c9a84c; border-color: rgba(201,168,76,0.4);  background: rgba(201,168,76,0.06); }
+        .role-techniker { color: #a0c8ff; border-color: rgba(160,200,255,0.4); background: rgba(160,200,255,0.06); }
+        .role-admin     { color: #e05050; border-color: rgba(224,80,80,0.4);   background: rgba(224,80,80,0.06); }
+        .role-dev       { color: #c080ff; border-color: rgba(192,128,255,0.4); background: rgba(192,128,255,0.06); }
+        .role-mod       { color: #50c878; border-color: rgba(80,200,120,0.4);  background: rgba(80,200,120,0.06); }
+        .role-builder   { color: #ff9f50; border-color: rgba(255,159,80,0.4);  background: rgba(255,159,80,0.06); }
+        .role-helper    { color: #60aaff; border-color: rgba(96,170,255,0.4);  background: rgba(96,170,255,0.06); }
+        .role-media     { color: #ff60a8; border-color: rgba(255,96,168,0.4);  background: rgba(255,96,168,0.06); }
+
+        /* ── EMPTY STATE (if no member) ── */
+        .member-card.empty {
+            opacity: 0.35;
+            border-style: dashed;
+            cursor: default;
+        }
+        .member-card.empty:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: rgba(201,168,76,0.15);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: rgba(4,4,4,0.98);
+            padding: 60px 50px 30px;
+            border-top: 2px solid var(--gold-dark);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo { display: flex; flex-direction: column; gap: 16px; }
+        .footer-logo img { width: 72px; height: 72px; border-radius: 10px; border: 1px solid var(--gold-dark); }
+        .footer-logo p { color: var(--muted); font-size: 14px; line-height: 1.8; }
+
+        .footer-links { display: flex; gap: 80px; }
+
+        .footer-column h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 16px;
+            margin-bottom: 18px;
+            letter-spacing: 2px;
+        }
+
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 12px; }
+        .footer-column ul li a { color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 600; transition: color 0.3s; }
+        .footer-column ul li a:hover { color: var(--gold); }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 28px;
+            border-top: 1px solid rgba(201,168,76,0.12);
+            color: var(--muted);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 36px; }
+            .nav-links { display: none; }
+            .members-grid { justify-content: center; }
+            .footer-content { flex-direction: column; gap: 40px; }
+            .footer-links { flex-direction: column; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="logo.png" alt="LucoSMP Logo">
+            <span>LucoSMP</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/" class="btn-home">HOME</a></li>
+            <li><a href="/team" class="active">TEAM</a></li>
+            <li><a href="/citybuild">CITYBUILD</a></li>
+            <li><a href="/support">SUPPORT</a></li>
+            <li>
+                <a href="https://discord.gg/6YTg2DvMMY" class="btn-discord">
+                    <svg width="20" height="16" viewBox="0 0 245 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M207.308 16.903C191.269 9.722 174.078 4.455 156.101 1.432C153.898 5.378 151.319 10.665 149.565 14.892C130.408 12.09 111.42 12.09 92.617 14.892C90.863 10.665 88.228 5.378 86.008 1.432C68.013 4.455 50.804 9.74 34.765 16.938C4.945 64.604 -3.027 111.069 0.959 156.876C22.215 172.761 42.826 182.426 63.1 188.725C68.195 181.629 72.746 174.082 76.617 166.145C69.05 163.235 61.798 159.628 54.964 155.435C56.718 154.157 58.436 152.826 60.1 151.44C99.994 170.524 143.394 170.524 182.825 151.44C184.507 152.826 186.225 154.157 187.962 155.435C181.11 159.645 173.84 163.252 166.273 166.163C170.144 174.082 174.677 181.647 179.789 188.743C200.081 182.444 220.709 172.779 241.965 156.876C246.688 104.215 233.44 58.178 207.308 16.903ZM80.703 128.716C69.195 128.716 59.723 118.171 59.723 105.268C59.723 92.366 68.997 81.803 80.703 81.803C92.408 81.803 101.882 92.348 101.683 105.268C101.7 118.171 92.408 128.716 80.703 128.716ZM164.37 128.716C152.862 128.716 143.39 118.171 143.39 105.268C143.39 92.366 152.664 81.803 164.37 81.803C176.075 81.803 185.549 92.348 185.35 105.268C185.35 118.171 176.075 128.716 164.37 128.716Z" fill="white"/>
+                    </svg>
+                    DISCORD
+                </a>
+            </li>
+            <li><a href="/wiki" class="btn-wiki">WIKI</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+    <h1>UNSER TEAM</h1>
+    <p>Die Menschen hinter LucoSMP</p>
+    <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-diamond"></div>
+        <div class="divider-line right"></div>
+    </div>
+</div>
+
+<!-- Team Content -->
+<section class="team-section">
+
+    <div class="rank-group rank-owner">
+        <div class="rank-title"><span class="rank-badge">OWNER</span><div class="rank-title-line"></div></div>
+        <div class="members-grid" id="grid-owner"></div>
+    </div>
+    <div class="rank-group rank-coowner">
+        <div class="rank-title"><span class="rank-badge">CO-OWNER</span><div class="rank-title-line"></div></div>
+        <div class="members-grid" id="grid-coowner"></div>
+    </div>
+    <div class="rank-group rank-manager">
+        <div class="rank-title"><span class="rank-badge">MANAGER</span><div class="rank-title-line"></div></div>
+        <div class="members-grid" id="grid-manager"></div>
+    </div>
+    <div class="rank-group rank-techniker">
+        <div class="rank-title"><span class="rank-badge">TECHNIKER</span><div class="rank-title-line"></div></div>
+        <div class="members-grid" id="grid-techniker"></div>
+    </div>
+    <div class="rank-group rank-admin">
+        <div class="rank-title"><span class="rank-badge">ADMIN</span><div class="rank-title-line"></div></div>
+        <div class="members-grid" id="grid-admin"></div>
+    </div>
+    <div class="rank-group rank-dev">
+        <div class="rank-title"><span class="rank-badge">DEVELOPER</span><div class="rank-title-line"></div></div>
+        <div class="members-grid" id="grid-dev"></div>
+    </div>
+    <div class="rank-group rank-mod">
+        <div class="rank-title"><span class="rank-badge">MODERATOR</span><div class="rank-title-line"></div></div>
+        <div class="members-grid" id="grid-mod"></div>
+    </div>
+    <div class="rank-group rank-builder">
+        <div class="rank-title"><span class="rank-badge">BUILDER</span><div class="rank-title-line"></div></div>
+        <div class="members-grid" id="grid-builder"></div>
+    </div>
+    <div class="rank-group rank-helper">
+        <div class="rank-title"><span class="rank-badge">HELPER</span><div class="rank-title-line"></div></div>
+        <div class="members-grid" id="grid-helper"></div>
+    </div>
+    <div class="rank-group rank-media">
+        <div class="rank-title"><span class="rank-badge">MEDIA</span><div class="rank-title-line"></div></div>
+        <div class="members-grid" id="grid-media"></div>
+    </div>
+
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">
+            <img src="footer-logo.png" alt="LucoSMP Logo">
+            <p>Copyright © 2026 LucoSMP®<br>We are not affiliated with Mojang, AB.</p>
+        </div>
+        <div class="footer-links">
+            <div class="footer-column">
+                <h4>Partner</h4>
+                <ul>
+                    <li><a href="#">Unsere Partner</a></li>
+                    <li><a href="#">Partner werden</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Team</h4>
+                <ul>
+                    <li><a href="/team">Unser Team</a></li>
+                    <li><a href="#">Bewerben</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="/impressum">Impressum</a></li>
+                    <li><a href="/datenschutz">Datenschutzerklärung</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>LucoSMP.de – Dein CityBuild Netzwerk &nbsp;•&nbsp; Made in Deutschland</p>
+    </div>
+</footer>
+
+<script>
+    // ─── TEAM DATA ───────────────────────────────────────────────────────
+    const team = {
+        owner:     ["ILuc", "Nicole"],
+        coowner:   ["dmZ_Crazy"],
+        manager:   ["Bobbelschmier"],
+        techniker: ["Agent_Flury", "Ziegelwand"],
+        admin:     ["FynnmagChips", "Timb"],
+        dev:       ["MommicMc", "EliVB", "CaniHD", "Dami22", "Lungo100", "Niklas.", "xdryx"],
+        mod:       ["ItsCuba_TV", "DonkeyM", "FunnyWolf"],
+        builder:   ["Bozhidar"],
+        helper:    [],
+        media:     ["Colourmine", "Bloom74", "Elias2224", "HaruTendou", "Lezonix", "XEinfachNicoo", "xFlameGamerTv", "Zintrio", "Romantisch"]
+    };
+
+    const roleLabel = {
+        owner:     "Owner",
+        coowner:   "Co-Owner",
+        manager:   "Manager",
+        techniker: "Techniker",
+        admin:     "Admin",
+        dev:       "Developer",
+        mod:       "Moderator",
+        builder:   "Builder",
+        helper:    "Helper",
+        media:     "Media"
+    };
+
+    const roleClass = {
+        owner:     "role-owner",
+        coowner:   "role-coowner",
+        manager:   "role-manager",
+        techniker: "role-techniker",
+        admin:     "role-admin",
+        dev:       "role-dev",
+        mod:       "role-mod",
+        builder:   "role-builder",
+        helper:    "role-helper",
+        media:     "role-media"
+    };
+
+    // Steve head fallback als Data-URL (pixel art, kein externes Bild nötig)
+    const STEVE_SVG = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 8 8'><rect width='8' height='8' fill='%23c18a57'/><rect x='1' y='2' width='2' height='2' fill='%2370a0f0'/><rect x='5' y='2' width='2' height='2' fill='%2370a0f0'/><rect x='2' y='5' width='4' height='1' fill='%23a05030'/></svg>`;
+
+    function skinUrl(name) {
+        // minotar.net funktioniert auch lokal / cross-origin
+        return `https://minotar.net/avatar/${encodeURIComponent(name)}/80`;
+    }
+
+    function buildGrid(rank) {
+        const grid = document.getElementById(`grid-${rank}`);
+        const members = team[rank];
+
+        if (members.length === 0) {
+            grid.innerHTML = `<div class="member-card empty">
+                <div class="skin-wrapper"><img src="${STEVE_SVG}" alt="Frei" style="image-rendering:pixelated"></div>
+                <div class="member-name" style="color:var(--muted)">Frei</div>
+                <div class="member-role ${roleClass[rank]}">${roleLabel[rank]}</div>
+            </div>`;
+            return;
+        }
+
+        grid.innerHTML = members.map(name => `
+            <div class="member-card">
+                <div class="skin-wrapper">
+                    <img src="${skinUrl(name)}" alt="${name}"
+                         onerror="this.onerror=null;this.src='${STEVE_SVG}'"
+                         style="image-rendering:pixelated">
+                </div>
+                <div class="member-name">${name}</div>
+                <div class="member-role ${roleClass[rank]}">${roleLabel[rank]}</div>
+            </div>
+        `).join('');
+    }
+
+    Object.keys(team).forEach(buildGrid);
+</script>
+</body>
+</html>
