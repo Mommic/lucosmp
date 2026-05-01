@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie-Management | LucoSMP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body class="legal-page cookie-page-body">
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav class="navbar glass-panel">
+        <div class="nav-logo">
+            <img src="logo.png" alt="Logo" class="nav-logo-img">
+            LucoSMP
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Zurück zur Startseite</a>
+        </div>
+    </nav>
+
+    <main class="content-section">
+        <div class="section-container legal-container">
+            <div class="cookie-hero">
+                <div class="cookie-hero-icon"><i class="fa-solid fa-cookie-bite"></i></div>
+                <h1 class="section-title">Cookie <span class="highlight">Management</span></h1>
+                <p class="section-subtitle">Deine Privatsphäre ist uns wichtig. Verwalte hier deine Präferenzen für ein optimales Erlebnis.</p>
+            </div>
+
+            <div class="cookie-objects-grid">
+                <!-- Essential Cookies Object -->
+                <div class="cookie-obj-card">
+                    <div class="cookie-obj-header">
+                        <div class="cookie-obj-status active"><i class="fa-solid fa-check"></i></div>
+                        <span class="cookie-tag essential">System</span>
+                    </div>
+                    <div class="cookie-obj-content">
+                        <h3>Notwendige Cookies</h3>
+                        <p>Diese Cookies sind das Fundament der Website. Sie ermöglichen Grundfunktionen wie die Seitennavigation und den Zugriff auf geschützte Bereiche.</p>
+                        <div class="cookie-obj-footer">
+                            <span class="status-text">Immer aktiv</span>
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- External Resources Object -->
+                <div class="cookie-obj-card interactive" id="externalCookieCard">
+                    <div class="cookie-obj-header">
+                        <div class="cookie-obj-status" id="externalStatusIcon"><i class="fa-solid fa-power-off"></i></div>
+                        <span class="cookie-tag external">Dienste</span>
+                    </div>
+                    <div class="cookie-obj-content">
+                        <h3>Externe Ressourcen</h3>
+                        <p>Aktiviert das Laden von Google Fonts, FontAwesome Icons und anderen externen Medien für das beste visuelle Erlebnis.</p>
+                        <div class="cookie-obj-footer">
+                            <span class="status-text" id="externalStatusText">Deaktiviert</span>
+                            <label class="cookie-toggle">
+                                <input type="checkbox" id="manageCookieExternal">
+                                <span class="cookie-toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cookie-action-bar glass-panel">
+                <div class="cookie-action-info">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Sicher & lokal gespeichert</span>
+                </div>
+                <div class="cookie-action-btns">
+                    <button id="saveDetailedCookies" class="btn btn-primary">
+                        Auswahl speichern
+                    </button>
+                    <button id="acceptAllDetailed" class="btn btn-donate-nav">
+                        Alle akzeptieren
+                    </button>
+                </div>
+            </div>
+
+            <div class="legal-footer-btn">
+                <a href="index.html" class="btn btn-back-home">Zurück zur Startseite</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Background Icons -->
+    <div class="floating-icons">
+        <i class="fa-solid fa-cookie floating-icon" style="top: 20%; left: 10%; animation-delay: 0s;"></i>
+        <i class="fa-solid fa-fingerprint floating-icon" style="top: 70%; right: 15%; animation-delay: 2s;"></i>
+        <i class="fa-solid fa-user-shield floating-icon" style="top: 40%; left: 80%; animation-delay: 4s;"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 LucoSMP. Alle Rechte vorbehalten. | <a href="index.html" class="highlight-small" style="text-decoration: none;">Zurück zur Startseite</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Controls (Bottom Right) -->
+    <div class="floating-controls">
+        <div id="backToTopContainer" class="back-to-top-container">
+            <button id="backToTop" class="btn-back-to-top">
+                <i class="fa-solid fa-chevron-up"></i>
+                <span>Nach oben</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

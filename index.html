@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LucoSMP | Minecraft Server</title>
+    <meta name="description" content="Spiele jetzt auf LucoSMP! Minecraft Version 1.21.10.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.png">
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ===== COOKIE CONSENT BANNER ===== -->
+    <div id="cookieBanner" class="cookie-banner hidden" role="dialog" aria-label="Cookie-Einstellungen">
+        <div class="cookie-banner-inner">
+            <div class="cookie-banner-text">
+                <div class="cookie-banner-title">
+                    <i class="fa-solid fa-cookie-bite"></i> Wir verwenden Cookies
+                </div>
+                <p>
+                    Diese Website nutzt Cookies und ähnliche Technologien, um das Nutzungserlebnis zu verbessern und externe Dienste (z.&nbsp;B. Google Fonts, FontAwesome) einzubinden. Mit Klick auf <strong>„Alle akzeptieren"</strong> stimmst du der Verwendung aller Cookies zu. Weitere Informationen findest du unter <a href="rechtliches.html" class="cookie-link">Impressum & Rechtliches</a>.
+                </p>
+            </div>
+            <div class="cookie-banner-actions">
+                <button id="cookieSettingsBtn" class="btn cookie-btn-settings">
+                    <i class="fa-solid fa-sliders"></i> Einstellungen
+                </button>
+                <button id="cookieEssentialBtn" class="btn cookie-btn-essential">
+                    Nur Notwendige
+                </button>
+                <button id="cookieAcceptAllBtn" class="btn cookie-btn-accept">
+                    <i class="fa-solid fa-check"></i> Alle akzeptieren
+                </button>
+            </div>
+        </div>
+
+        <!-- Cookie Settings Panel (inline) -->
+        <div id="cookieSettings" class="cookie-settings-panel hidden">
+            <h3><i class="fa-solid fa-gear"></i> Cookie-Einstellungen</h3>
+            <div class="cookie-option">
+                <div class="cookie-option-info">
+                    <strong>Notwendige Cookies</strong>
+                    <span>Grundlegende Funktionen der Website. Immer aktiv.</span>
+                </div>
+                <label class="cookie-toggle">
+                    <input type="checkbox" id="cookieNecessary" checked disabled>
+                    <span class="cookie-toggle-slider always-on"></span>
+                </label>
+            </div>
+            <div class="cookie-option">
+                <div class="cookie-option-info">
+                    <strong>Externe Ressourcen</strong>
+                    <span>Google Fonts &amp; FontAwesome (CDN-Schriften &amp; Icons).</span>
+                </div>
+                <label class="cookie-toggle">
+                    <input type="checkbox" id="cookieExternal" checked>
+                    <span class="cookie-toggle-slider"></span>
+                </label>
+            </div>
+            <div class="cookie-settings-actions">
+                <button id="cookieSaveSettingsBtn" class="btn cookie-btn-accept">
+                    <i class="fa-solid fa-floppy-disk"></i> Auswahl speichern
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor Glow -->
+    <div id="cursor-glow"></div>
+
+    <!-- Background Elements -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+        <div class="blob blob-5"></div>
+    </div>
+
+    <!-- Floating Background Icons -->
+    <div class="floating-icons">
+        <i class="fa-solid fa-cube floating-icon" style="top: 15%; left: 10%; animation-delay: 0s;"></i>
+        <i class="fa-solid fa-gem floating-icon" style="top: 70%; left: 5%; animation-delay: 2s;"></i>
+        <i class="fa-solid fa-hammer floating-icon" style="top: 40%; right: 10%; animation-delay: 4s;"></i>
+        <i class="fa-solid fa-bomb floating-icon" style="top: 80%; right: 15%; animation-delay: 1s;"></i>
+        <i class="fa-solid fa-skull floating-icon" style="top: 25%; right: 25%; animation-delay: 3s;"></i>
+        <i class="fa-solid fa-cubes floating-icon" style="top: 60%; left: 20%; animation-delay: 5s;"></i>
+        <i class="fa-solid fa-ghost floating-icon" style="top: 10%; right: 40%; animation-delay: 6s;"></i>
+        <i class="fa-solid fa-shield-heart floating-icon" style="top: 90%; left: 45%; animation-delay: 7s;"></i>
+    </div>
+
+    <nav class="navbar glass-panel">
+        <div class="nav-logo">
+            <img src="logo.png" alt="Logo" class="nav-logo-img">
+            LucoSMP
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="#regeln" class="nav-link">Regeln</a>
+            <a href="#team" class="nav-link">Team</a>
+            <a href="#unterstuetzen" class="nav-link">Unterstützen</a>
+        </div>
+        <div class="nav-actions">
+            <button class="btn btn-donate-nav open-dono-modal">
+                <i class="fa-solid fa-heart donate-heart-icon"></i> Unterst&uuml;tzen
+            </button>
+        </div>
+    </nav>
+
+    <main id="home" class="hero-section">
+        <div class="hero-content glass-panel">
+            <img src="logo.png" alt="LucoSMP Logo" class="hero-logo">
+            <h1 class="hero-title hidden-text">Willkommen auf <span class="highlight">LucoSMP</span></h1>
+            <p class="hero-subtitle">Dein ultimatives Minecraft Survival Erlebnis auf der Version <span class="version-badge">1.21.10</span></p>
+            
+            <div class="action-buttons">
+                <button id="copyIpBtn" class="btn btn-primary btn-large glow-effect">
+                    <span class="ip-text">LucoSMP.de</span>
+                    <span class="copy-icon"><i class="fa-solid fa-copy"></i></span>
+                </button>
+                <a href="https://dsc.gg/lucosmp" target="_blank" class="btn btn-secondary btn-large">
+                    <i class="fa-brands fa-discord"></i> Discord Joinen
+                </a>
+            </div>
+            <div id="copyNotification" class="notification hidden">IP in die Zwischenablage kopiert!</div>
+        </div>
+    </main>
+
+    <!-- Features Section -->
+    <section id="features" class="content-section features-section">
+        <div class="section-container glass-panel">
+            <h2 class="section-title">Warum <span class="highlight">LucoSMP</span>?</h2>
+            <p class="section-subtitle">Entdecke, was unseren Server so besonders macht.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-bomb"></i></div>
+                    <h3>Echtes Survival</h3>
+                    <p>Erbaue dein Imperium oder raide andere Basen. Bei uns gibt es spannende Survival-Action ohne unnötige Einschränkungen!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                    <h3>Aktive Community</h3>
+                    <p>Tritt unserem Discord bei, finde neue Mitspieler und schmiede mächtige Allianzen in einer lebendigen Welt.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Aktuellste Version</h3>
+                    <p>Wir spielen auf der neuesten Minecraft Version 1.21.10 mit allen brandneuen Features und Blöcken.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regeln Section -->
+    <section id="regeln" class="content-section">
+        <div class="section-container glass-panel">
+            <h2 class="section-title">Server Regeln</h2>
+            <p class="section-subtitle">Ein fairer Umgang miteinander ist uns wichtig.</p>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <i class="fa-solid fa-gavel"></i>
+                    <p>1. Sei respektvoll zu anderen Spielern.</p>
+                </div>
+                <div class="rule-item">
+                    <i class="fa-solid fa-ban"></i>
+                    <p>2. Cheating und Hacking sind strengstens verboten.</p>
+                </div>
+                <div class="rule-item">
+                    <i class="fa-solid fa-bomb"></i>
+                    <p>3. Griefing und Raiden ist <strong>erlaubt</strong> (Es ist ein SMP!).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="content-section">
+        <div class="section-container glass-panel">
+            <h2 class="section-title">Unser <span class="highlight">Team</span></h2>
+            <p class="section-subtitle">Die Leute hinter LucoSMP</p>
+
+            <div class="team-grid">
+                <!-- Owner -->
+                <div class="team-card role-owner">
+                    <h3 class="role-title">Owner</h3>
+                    <div class="members">
+                        <span class="member"><i class="fa-solid fa-user"></i> Bobbbelbear15</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> 𝐈𝐋𝐔𝐂</span>
+                    </div>
+                </div>
+
+                <!-- Co-Owner -->
+                <div class="team-card role-coowner">
+                    <h3 class="role-title">Co-Owner</h3>
+                    <div class="members">
+                        <span class="member"><i class="fa-solid fa-user"></i> ITSCuBaTV</span>
+                    </div>
+                </div>
+
+                <!-- Manager -->
+                <div class="team-card role-manager">
+                    <h3 class="role-title">Manager</h3>
+                    <div class="members">
+                        <span class="member"><i class="fa-solid fa-user"></i> AgEnT_FlurY-_</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> FynnMagChips</span>
+                    </div>
+                </div>
+
+                <!-- Dev -->
+                <div class="team-card role-dev">
+                    <h3 class="role-title">Dev</h3>
+                    <div class="members">
+                        <span class="member"><i class="fa-solid fa-user"></i> niklas</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> CaniHD</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> mommic</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> mika</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> Ziegelwand</span>
+                    </div>
+                </div>
+
+                <!-- Admin -->
+                <div class="team-card role-admin">
+                    <h3 class="role-title">Admin</h3>
+                    <div class="members">
+                        <span class="member"><i class="fa-solid fa-user"></i> x</span>
+                    </div>
+                </div>
+
+                <!-- Mod -->
+                <div class="team-card role-mod">
+                    <h3 class="role-title">Mod</h3>
+                    <div class="members">
+                        <span class="member"><i class="fa-solid fa-user"></i> Uchia</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> mats</span>
+                    </div>
+                </div>
+
+                <!-- Builder -->
+                <div class="team-card role-builder">
+                    <h3 class="role-title">Builder</h3>
+                    <div class="members">
+                        <span class="member"><i class="fa-solid fa-user"></i> toxing</span>
+                    </div>
+                </div>
+
+                <!-- Helper -->
+                <div class="team-card role-helper">
+                    <h3 class="role-title">Helper</h3>
+                    <div class="members">
+                        <span class="member"><i class="fa-solid fa-user"></i> davidghg</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> uuy72</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> donkymonky</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> Leyscery</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> Paul</span>
+                    </div>
+                </div>
+
+                <!-- Medias -->
+                <div class="team-card role-media">
+                    <h3 class="role-title">Medias</h3>
+                    <div class="members">
+                        <span class="member"><i class="fa-solid fa-user"></i> Elias22241</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> Ertzfeint</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> flixo</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> JapanAcht</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> Jason_GG</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> KingMatti213</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> Wave_079</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> xEinfachNicoo</span>
+                        <span class="member"><i class="fa-solid fa-user"></i> zintrio</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support / Donate Section (Embedded Window) -->
+    <section id="unterstuetzen" class="content-section">
+        <div class="section-container glass-panel">
+            <h2 class="section-title">Support & <span class="highlight">Donations</span></h2>
+            <p class="section-subtitle">Unterst&uuml;tze den Server direkt &uuml;ber unser integriertes Spenden-Fenster.</p>
+            
+            <div class="donation-external-card">
+                <div class="dono-card-icon"><i class="fa-solid fa-external-link-alt"></i></div>
+                <div class="dono-card-content">
+                    <h3>Spenden via Streamlabs</h3>
+                    <p>Werde Teil der Legenden und unterst&uuml;tze den Server direkt &uuml;ber Streamlabs!</p>
+                    <button class="btn btn-donate-nav btn-large open-dono-modal">
+                        <i class="fa-solid fa-heart donate-heart-icon"></i> Jetzt auf Streamlabs unterstützen
+                    </button>
+                </div>
+            </div>
+
+            <div class="donate-legal-box">
+                <div class="legal-header">
+                    <i class="fa-solid fa-scale-balanced"></i> Rechtliche Hinweise & Spenden-Info
+                </div>
+                <div class="legal-body">
+                    <p>S&auml;mtliche Spenden und Transaktionen laufen <strong>nicht direkt &uuml;ber LucoSMP</strong>. Wir nutzen den Dienstleister <strong>Streamlabs</strong> zur sicheren Abwicklung der Zahlungen.</p>
+                    <p>Mit dem Klick auf den Spenden-Button wirst du zu Streamlabs weitergeleitet oder nutzt das oben eingebettete Fenster. Es gelten die Nutzungsbedingungen und Datenschutzrichtlinien von Streamlabs.</p>
+                    <div class="dono-link-share">
+                        <span>Dein direkter Spendenlink:</span>
+                        <code id="donoLinkText">https://streamlabs.com/iluctv/tip</code>
+                        <button class="copy-small-btn" onclick="copyDonoLink()"><i class="fa-solid fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="donate-info-text">
+                <p><i class="fa-solid fa-heart"></i> Jede Spende wird zu 100% in die Server-Infrastruktur und neue Features f&uuml;r LucoSMP gesteckt. Vielen Dank f&uuml;r deinen Support!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="logo.png" alt="LucoSMP Logo">
+                        <span>LucoSMP</span>
+                    </div>
+                    <p class="footer-desc">Dein ultimatives Minecraft Survival Erlebnis. Trete unserer wachsenden Community bei und erlebe Abenteuer wie nie zuvor.</p>
+                    <div class="footer-socials">
+                        <a href="https://dsc.gg/lucosmp" target="_blank" class="social-pill discord">
+                            <i class="fa-brands fa-discord"></i> Discord
+                        </a>
+                        <a href="https://www.tiktok.com/@lucosmp.de" target="_blank" class="social-pill tiktok">
+                            <i class="fa-brands fa-tiktok"></i> TikTok
+                        </a>
+                        <a href="https://www.youtube.com/@LucoSMP-de" target="_blank" class="social-pill youtube">
+                            <i class="fa-brands fa-youtube"></i> YouTube
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#regeln">Regeln</a></li>
+                        <li><a href="#team">Team & Medias</a></li>
+                        <li><a href="#unterstuetzen">Unterst&uuml;tzen</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://dsc.gg/lucosmp" target="_blank">Discord Server</a></li>
+                        <li><a href="https://www.tiktok.com/@lucosmp.de" target="_blank">TikTok</a></li>
+                        <li><a href="https://www.youtube.com/@LucoSMP-de" target="_blank">YouTube</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><a href="rechtliches.html">Rechtliches</a></li>
+                        <li><a href="cookies.html">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-line"></div>
+                <div class="footer-bottom-content">
+                    <div class="footer-bottom-left">
+                        <p>&copy; 2026 LucoSMP. Alle Rechte vorbehalten.</p>
+                    </div>
+                    <div class="footer-bottom-right">
+                        <a href="rechtliches.html">Impressum</a>
+                        <span class="footer-dot">•</span>
+                        <a href="cookies.html">Cookies</a>
+                        <span class="footer-dot">•</span>
+                        <span class="highlight-small">Made with ❤️</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Controls (Bottom Right) -->
+    <div class="floating-controls">
+        <div id="backToTopContainer" class="back-to-top-container">
+            <button id="backToTop" class="btn-back-to-top">
+                <i class="fa-solid fa-chevron-up"></i>
+                <span>Nach oben</span>
+            </button>
+        </div>
+    </div>
+
+
+
+    <!-- Donation Notice Modal -->
+    <div id="donoNoticeModal" class="modal hidden">
+        <div class="modal-content glass-panel dono-notice-modal">
+            <span class="close-btn" id="closeDonoNoticeBtn">&times;</span>
+            <div class="notice-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <h2>Wichtiger Hinweis</h2>
+            <p>Du wirst nun zu unserer externen Spendenseite auf <strong>Streamlabs</strong> weitergeleitet.</p>
+            <div class="notice-details">
+                <ul>
+                    <li><i class="fa-solid fa-shield-halved"></i> Sicherer Zahlungsdienstleister</li>
+                    <li><i class="fa-solid fa-hand-holding-heart"></i> 100% Support f&uuml;r den Server</li>
+                    <li><i class="fa-solid fa-scale-balanced"></i> Abwicklung erfolgt &uuml;ber Streamlabs</li>
+                </ul>
+            </div>
+            <div class="modal-legal-note">
+                <p>Hinweis: LucoSMP &uuml;bernimmt keine Haftung f&uuml;r Transaktionen. S&auml;mtliche Spenden laufen &uuml;ber den Drittanbieter Streamlabs.</p>
+            </div>
+            <a href="https://streamlabs.com/iluctv/tip" target="_blank" id="confirmDonoBtn" class="btn btn-donate-nav btn-large">
+                Weiterfahren <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <p class="notice-small">Mit dem Klick auf "Weiterfahren" akzeptierst du die Bedingungen von Streamlabs.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
